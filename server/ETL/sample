@@ -1,0 +1,87 @@
+
+questions.csv
+id,product_id,body,date_written,asker_name,asker_email,reported,helpful
+1,1,"What fabric is the top made of?",1595884714409,"yankeelover","first.last@gmail.com",0,1
+2,1,"HEY THIS IS A WEIRD QUESTION!!!!?",1613888219613,"jbilas","first.last@gmail.com",1,4
+3,1,"Does this product run big or small?",1608535907083,"jbilas","first.last@gmail.com",0,8
+
+
+answers.csv
+id,question_id,body,date_written,answerer_name,answerer_email,reported,helpful
+1,36,"Supposedly suede, but I think its synthetic",1599958385988,"sillyguy","first.last@gmail.com",0,1
+2,13,"Some kind of recycled rubber, works great!",1615008233634,"marcanthony","first.last@gmail.com",0,2
+3,23,"Some kind of recycled rubber, works great!",1592693405366,"iluvdogz","first.last@gmail.com",0,3
+
+
+
+answers_photos.csv
+id,answer_id,url
+1,5,"https://images.unsplash.com/photo-1530519729491-aea5b51d1ee1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80"
+2,5,"https://images.unsplash.com/photo-1511127088257-53ccfcc769fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+3,5,"https://images.unsplash.com/photo-1500603720222-eb7a1f997356?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1653&q=80"
+
+
+
+mongoimport \
+   --uri='mongodb://localhost:27017/QandA' \
+   --collection='questions' \
+   --file=questions.csv \
+   --type=csv \
+   --columnsHaveTypes \
+   --fieldFile=questions_types.txt
+
+
+mongoimport \
+--uri='mongodb://localhost:27017/QandA' \
+--collection='questions' \
+--file=questions.csv \
+--type=csv \
+--headerline
+
+
+mongoimport \
+--uri='mongodb://localhost:27017/QandA' \
+--collection='answers' \
+--file=answers.csv \
+--type=csv \
+--headerline
+
+
+mongoimport \
+--uri='mongodb://localhost:27017/QandA' \
+--collection='photos' \
+--file=answers_photos.csv \
+--type=csv \
+--headerline
+
+
+
+
+const QandASchema = new mongoose.Schema({
+  id: Number,
+  product_id: Number,
+  body: String,
+  date: Date,
+  asker_name: String,
+  asker_email: String,
+  helpfulness: Number,
+  reported: Boolean,
+  answers: [
+    {
+      id: Number,
+      body: String,
+      date: Date,
+      answerer_name: String,
+      answerer_email: String,
+      helpfulness: Number,
+      photos: [
+        {
+          id: Number,
+          url: String
+        }
+      ]
+    }
+  ]
+})
+
+
