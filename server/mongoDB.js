@@ -10,7 +10,7 @@ const QuestionSchema = new mongoose.Schema({
   date_written: Date,
   asker_name: String,
   asker_email: String,
-  reported: Boolean,
+  reported: Number,
   helpful: Number
 })
 
@@ -21,12 +21,12 @@ const PhotoSchema = new mongoose.Schema({
 
 const AnswerSchema = new mongoose.Schema({
   id: {type: Number, unique: true},
-  question_id: Number,
+  question_id:  {type: Number, index: true},
   body: String,
   date_written: Date,
   answerer_name: String,
   answerer_email: String,
-  reported: Boolean,
+  reported: Number,
   helpful: Number,
   photos: [PhotoSchema],
 })
