@@ -121,6 +121,100 @@ exports.getAnswers = (req, res) => {
 };
 
 
+exports.addQuestion = (req, res) => {
+  var question = {
+    product_id: req.body.product_id,
+    body: req.body.body,
+    name: req.body.name,
+    email: req.body.email
+  };
+
+  QandA.addQuestion(question, (err, data) => {
+    if (err) {
+      console.log(err, '========addQuestion error');
+      res.json(err);
+    } else {
+      console.log(data, '==========addQuestion data')
+      // res.json(data);
+      res.status(201).json('CREATED');
+    }
+  })
+}
+
+
+exports.addAnswer = (req, res) => {
+  var answer = {
+    question_id: req.params.qid,
+    body: req.body.body,
+    name: req.body.name,
+    email: req.body.email,
+    photos: req.body.photos
+  };
+  QandA.addAnswer(answer, (err, data) => {
+    if (err) {
+      console.log(err, '========addAnswer error');
+      res.json(err);
+    } else {
+      console.log(data, '==========addAnswer data')
+      // res.json(data);
+      res.status(201).json('CREATED');
+    }
+  })
+}
+
+
+exports.changeQHelpful = (req, res) => {
+  QandA.updateQHelpful(req.params.qid, (err, data) => {
+    if (err) {
+      console.log(err, '========updateQHelpful error');
+      res.json(err);
+    } else {
+      console.log(data, '==========updateQHelpful data')
+      // res.json(data);
+      res.status(204).json('NO CONTENT');
+    }
+  })
+}
+
+exports.reportQ = (req, res) => {
+  QandA.updateQreport(req.params.qid, (err, data) => {
+    if (err) {
+      console.log(err, '========updateQreport error');
+      res.json(err);
+    } else {
+      console.log(data, '==========updateQreport data')
+      // res.json(data);
+      res.status(204).json('NO CONTENT');
+    }
+  })
+}
+
+exports.changeAHelpful = (req, res) => {
+  QandA.updateAHelpful(req.params.aid, (err, data) => {
+    if (err) {
+      console.log(err, '========updateAHelpful error');
+      res.json(err);
+    } else {
+      console.log(data, '==========updateAHelpful data')
+      // res.json(data);
+      res.status(204).json('NO CONTENT');
+    }
+  })
+}
+
+exports.reportA = (req, res) => {
+  QandA.updateAreport(req.params.aid, (err, data) => {
+    if (err) {
+      console.log(err, '========updateAreport error');
+      res.json(err);
+    } else {
+      console.log(data, '==========updateAreport data')
+      // res.json(data);
+      res.status(204).json('NO CONTENT');
+    }
+  })
+}
+
 
 // const QuestionSchema = new mongoose.Schema({
 //   id: {type: Number, unique: true},
