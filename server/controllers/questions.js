@@ -88,11 +88,12 @@ exports.getQuestions = (req, res) => {
 };
 
 exports.getAnswers = (req, res) => {
+  console.log('getAnswers route');
   QandA.findAnswerByID(req.params.qid, (err, data) => {
     if (err) {
       console.log(err, '==========findAnswerByID error');
     } else {
-      // console.log(data, '========findAnswerByID data');
+      //console.log(data, '========findAnswerByID data');
       var page = Number(req.query.page || 1);
       var count = Number(req.query.count || 5);
       var startIndex = (page - 1) * count;
