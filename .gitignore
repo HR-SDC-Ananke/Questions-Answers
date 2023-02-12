@@ -1,3 +1,7 @@
 .env
 node_modules
 server/data/*
+dump
+mongo.tar.gz
+.nyc_output
+
