@@ -45,6 +45,8 @@ var transQandA = function(Pid, questions, answers) {
 
 exports.getQuestions = (req, res) => {
   // console.log(req.query.product_id, '=======req.params.product_id');
+  // var startTime = new Date();
+  // console.log('=============getQuestions start :', startTime ,'==============')
   QandA.findQuestionByID(req.query.product_id, (err, questions) => {
     if (err) {
       console.log(err, '==========findQuestionByID error');
@@ -74,6 +76,10 @@ exports.getQuestions = (req, res) => {
         } else {
           // console.log(answers, '========findAnswerByArray data');
           var transData = transQandA(req.query.product_id, batchQ, answers);
+          // var endTime = new Date();
+          // var diff = endTime - startTime;
+          // console.log('=============getQuestions end :', endTime ,'==============')
+          // console.log('======duration', diff);
           res.json(transData);
         }
       })
