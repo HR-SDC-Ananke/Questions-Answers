@@ -16,4 +16,8 @@ app.put('/questions/:qid/report', controllerQ.reportQ);
 app.put('/answers/:aid/helpful', controllerQ.changeAHelpful);
 app.put('/answers/:aid/report', controllerQ.reportA);
 
+app.get('/loaderio-07595a0b7626c465daf47c862c716978/', (req, res) => {
+  res.json('loaderio-07595a0b7626c465daf47c862c716978');
+});
+
 module.exports = app.listen(3001);
