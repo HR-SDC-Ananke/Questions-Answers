@@ -1,7 +1,8 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 
-mongoose.connect(`mongodb://localhost:27017/${process.env.DB_NAME}`);
+// mongoose.connect(`mongodb://localhost:27017/${process.env.DB_NAME}`);
+mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@34.219.75.48:27017/${process.env.DB_NAME}`);
 
 const QuestionSchema = new mongoose.Schema({
   id: {type: Number, unique: true},
